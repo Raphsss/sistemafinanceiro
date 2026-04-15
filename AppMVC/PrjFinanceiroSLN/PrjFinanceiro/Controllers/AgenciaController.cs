@@ -23,6 +23,7 @@ namespace PrjFinanceiro.Controllers
             return View(agencias); // Passa a lista para a View
         }
 
+        // GET: Agencia/Details/x
         public IActionResult Details(int? id)
         {
             if (id == null)

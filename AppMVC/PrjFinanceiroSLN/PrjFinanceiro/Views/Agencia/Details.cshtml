@@ -1,0 +1,34 @@
+@model PrjFinanceiro.Models.Agencia
+
+@{
+    ViewData["Title"] = "Detalhes da Agência";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Código</dt>
+            <dd class="col-sm-9">@Model.Codigo</dd>
+
+            <dt class="col-sm-3">Nome</dt>
+            <dd class="col-sm-9">@Model.Nome</dd>
+
+            <dt class="col-sm-3">Cidade</dt>
+            <dd class="col-sm-9">@Model.Cidade</dd>
+
+            <dt class="col-sm-3">Estado (UF)</dt>
+            <dd class="col-sm-9">@Model.EstadoUF</dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Codigo" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+    <form asp-action="Delete" asp-route-id="@Model.Codigo" method="post" class="d-inline" onsubmit="return confirm('Deseja excluir esta agência?');">
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        @Html.AntiForgeryToken()
+    </form>
+</div>
