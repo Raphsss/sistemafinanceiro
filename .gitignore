@@ -13,3 +13,24 @@
 *.v2
 /AppMVC/PrjFinanceiroSLN/.vs/PrjFinanceiroSLN/v17
 *.v2
+
+# Outros arquivos temporários
+*.tmp
+*.temp
+*~
+*.orig
+
+# Arquivos gerados pelo .NET
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Configurações do Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
