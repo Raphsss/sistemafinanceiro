@@ -61,5 +61,37 @@ namespace PrjFinanceiro.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        // GET: Agencia/Edit/x
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+
+            if (agencia == null)
+            {
+                return NotFound();
+            }
+
+            return View(agencia);
+        }
+
+        // POST: Agencia/Edit/x
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Agencia agencia)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(agencia);
+            }
+
+            _context.Agencia.Update(agencia);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

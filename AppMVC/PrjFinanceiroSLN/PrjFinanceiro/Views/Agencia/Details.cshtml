@@ -27,7 +27,8 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Codigo" class="btn btn-primary">Editar</a>
     <a asp-action="Index" class="btn btn-secondary">Voltar</a>
-    <form asp-action="Delete" asp-route-id="@Model.Codigo" method="post" class="d-inline" onsubmit="return confirm('Deseja excluir esta agência?');">
+    <form asp-action="Delete" asp-route-id="@Model.Codigo" method="post" class="d-inline" 
+        onsubmit="return confirm('Deseja excluir esta agência?');">
         <button type="submit" class="btn btn-danger">Excluir</button>
         @Html.AntiForgeryToken()
     </form>
