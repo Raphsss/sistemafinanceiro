@@ -15,12 +15,29 @@ namespace PrjFinanceiro.Controllers
 
         public IActionResult Index()
         {
-            var lista = _context.Agencia.ToList();
+            var agencias = _context.Agencia.ToList();
             ViewBag.nomesenai = "SENAI";
             
-            return View(lista); // Passa a lista para a View
+            
+            return View(agencias); // Passa a lista para a View
         }
 
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+             var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+
+            if (agencia == null)
+            {
+                return NotFound();
+            }
+
+            return View(agencia);
+        }
 
     }
 }
