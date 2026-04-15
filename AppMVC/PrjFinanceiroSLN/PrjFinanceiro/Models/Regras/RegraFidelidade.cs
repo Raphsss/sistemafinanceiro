@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using PrjFinanceiro.Models.Interfaces;
+using System.Collections.Generic;
 
-namespace PrjFinanceiro.Models
+namespace PrjFinanceiro.Models.Regras
 {
     public class RegraFidelidade : IRegraEscore
     {

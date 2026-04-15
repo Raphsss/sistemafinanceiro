@@ -1,4 +1,5 @@
 ﻿using PrjFinanceiro.Models;
+using PrjFinanceiro.Models.Regras;
 using PrjFinanceiro.Services;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,6 @@
-﻿namespace PrjFinanceiro.Models
+﻿using PrjFinanceiro.Models.Interfaces;
+
+namespace PrjFinanceiro.Models.Regras
 {
     public class RegraSaldoMinimo : IRegraEscore
     {

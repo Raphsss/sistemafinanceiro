@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using PrjFinanceiro.Models;
 using Microsoft.Extensions.Configuration;
+using PrjFinanceiro.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

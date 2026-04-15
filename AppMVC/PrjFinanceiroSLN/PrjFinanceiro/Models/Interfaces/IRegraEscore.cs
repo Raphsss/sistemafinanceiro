@@ -1,4 +1,4 @@
-﻿namespace PrjFinanceiro.Models
+﻿namespace PrjFinanceiro.Models.Interfaces
 {
     public interface IRegraEscore
     {

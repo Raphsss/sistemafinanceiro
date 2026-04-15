@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PrjFinanceiro.Data;
 using PrjFinanceiro.Models;
 using System.Linq;
 
@@ -17,8 +18,8 @@ namespace PrjFinanceiro.Controllers
         {
             var agencias = _context.Agencia.ToList();
             ViewBag.nomesenai = "SENAI";
-            
-            
+
+
             return View(agencias); // Passa a lista para a View
         }
 
@@ -28,8 +29,8 @@ namespace PrjFinanceiro.Controllers
             {
                 return NotFound();
             }
-            
-             var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+
+            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
 
             if (agencia == null)
             {
@@ -39,5 +40,25 @@ namespace PrjFinanceiro.Controllers
             return View(agencia);
         }
 
+        // GET: Agencia/Create
+        public IActionResult Create()
+        {
+            return View(); // Views/Aluno/Create.cshtml, retorna este caminho por convernção
+        }
+
+        // POST: Agencia/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Agencia agencia)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(agencia);
+            }
+
+            _context.Agencia.Add(agencia);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

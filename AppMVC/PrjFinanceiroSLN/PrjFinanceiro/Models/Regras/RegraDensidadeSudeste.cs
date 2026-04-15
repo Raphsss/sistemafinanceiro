@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using PrjFinanceiro.Models.Interfaces;
+using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 
-namespace PrjFinanceiro.Models
+namespace PrjFinanceiro.Models.Regras
 {
     public class RegraDensidadeSudeste : IRegraEscore
     {

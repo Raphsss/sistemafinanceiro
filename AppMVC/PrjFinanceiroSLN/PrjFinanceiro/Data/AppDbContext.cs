@@ -1,7 +1,8 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using PrjFinanceiro.Models;
 
-namespace PrjFinanceiro.Models
+namespace PrjFinanceiro.Data
 
 {
     public class AppDbContext : DbContext

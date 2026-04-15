@@ -6,8 +6,11 @@ namespace PrjFinanceiro.Models
     {
         [Key]
         public int Codigo { get; set; }
+        [Required]
         public string Nome { get; set; }
+        [Required]
         public string Cidade { get; set; }
+        [Required]
         public string EstadoUF { get; set; }
     }
 }
