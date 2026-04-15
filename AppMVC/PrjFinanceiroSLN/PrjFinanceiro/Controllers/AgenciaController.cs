@@ -93,5 +93,36 @@ namespace PrjFinanceiro.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        // GET: Agencia/Delete/x
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+            if (agencia == null)
+            {
+                return NotFound();
+            }
+            return View(agencia);
+        }
+
+        // POST: Agencia/Delete/x
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+            if (agencia == null)
+            {
+                return NotFound();
+            }
+
+            _context.Agencia.Remove(agencia);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
