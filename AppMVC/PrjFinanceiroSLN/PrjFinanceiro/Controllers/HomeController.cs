@@ -13,9 +13,10 @@ namespace PrjFinanceiro.Controllers
         {
             _logger = logger;
         }
-
+        //TODO
         public IActionResult Index()
         {
+            _logger.LogInformation("Acesse a página inicial.");
             return View();
         }
 
