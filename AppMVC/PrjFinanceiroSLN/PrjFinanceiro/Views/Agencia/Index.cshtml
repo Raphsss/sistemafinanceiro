@@ -27,10 +27,56 @@
                     <td>@item.EstadoUF</td>
                     <td>
                         <a href="/Agencia/Edit/@item.Codigo" class="btn btn-sm btn-primary">Editar</a>
-                        <a href="/Agencia/Delete/@item.Codigo" class="btn btn-sm btn-danger">Excluir</a>
+                    <td>
+                        <a href="/Agencia/Edit/@item.Codigo" class="btn btn-sm btn-primary">Editar</a>
+                        <button type="button"
+                                class="btn btn-sm btn-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                data-codigo="@item.Codigo"
+                                data-nome="@item.Nome">
+                            Excluir
+                        </button>
+                    </td>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<!-- Modal de Confirmação de Exclusão -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir a agência <strong id="agenciaNome"></strong>?
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post">
+                    <input type="hidden" name="id" id="agenciaCodigo" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var codigo = button.getAttribute('data-codigo');
+            var nome = button.getAttribute('data-nome');
+            document.getElementById('agenciaCodigo').value = codigo;
+            document.getElementById('agenciaNome').textContent = nome;
+            document.getElementById('deleteForm').action = '/Agencia/Delete/' + codigo;
+        });
+    </script>
+}
