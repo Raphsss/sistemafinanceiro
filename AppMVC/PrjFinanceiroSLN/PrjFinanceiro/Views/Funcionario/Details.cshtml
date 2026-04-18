@@ -1,0 +1,44 @@
+@model PrjFinanceiro.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Detalhes do Funcionário";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Código</dt>
+            <dd class="col-sm-9">@Model.Codigo</dd>
+
+            <dt class="col-sm-3">Nome</dt>
+            <dd class="col-sm-9">@Model.Nome</dd>
+
+            <dt class="col-sm-3">Data de Nascimento</dt>
+            <dd class="col-sm-9">@Model.DataNascimento.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Cidade</dt>
+            <dd class="col-sm-9">@Model.Cidade</dd>
+
+            <dt class="col-sm-3">Estado (UF)</dt>
+            <dd class="col-sm-9">@Model.EstadoUF</dd>
+
+            <dt class="col-sm-3">CPF</dt>
+            <dd class="col-sm-9">@Model.CPF</dd>
+
+            <dt class="col-sm-3">Telefone</dt>
+            <dd class="col-sm-9">@Model.Telefone</dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Codigo" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+    <form asp-action="Delete" asp-route-id="@Model.Codigo" method="post" class="d-inline"
+          onsubmit="return confirm('Deseja excluir este funcionário?');">
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        @Html.AntiForgeryToken()
+    </form>
+</div>

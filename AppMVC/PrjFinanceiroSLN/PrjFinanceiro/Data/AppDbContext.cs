@@ -10,6 +10,7 @@ namespace PrjFinanceiro.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Agencia> Agencia { get; set; }
+        public DbSet<Funcionario> Funcionario { get; set; }
 
     }
 }

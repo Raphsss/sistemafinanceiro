@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PrjFinanceiro.Models.Funcionario>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Lista de Funcionários - @ViewBag.nomesenai</h2>
+
+    <p>
+        <a href="/Funcionario/Create" class="btn btn-success">Cadastrar Novo Funcionário</a>
+    </p>
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>Cidade</th>
+                <th>Estado (UF)</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Codigo</td>
+                    <td><a href="/Funcionario/Details/@item.Codigo">@item.Nome</a></td>
+                    <td>@item.DataNascimento.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Cidade</td>
+                    <td>@item.EstadoUF</td>
+                    <td>@item.CPF</td>
+                    <td>@item.Telefone</td>
+                    <td>
+                        <a href="/Funcionario/Edit/@item.Codigo" class="btn btn-sm btn-primary">Editar</a>
+                        <form asp-action="Delete" asp-route-id="@item.Codigo" method="post" class="d-inline"
+                              onsubmit="return confirm('Deseja excluir este funcionário?');">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                            @Html.AntiForgeryToken()
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
