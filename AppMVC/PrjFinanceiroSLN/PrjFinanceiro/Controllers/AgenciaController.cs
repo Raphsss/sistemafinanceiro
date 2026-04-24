@@ -69,28 +69,47 @@ namespace PrjFinanceiro.Controllers
             {
                 return NotFound();
             }
-            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+
+            var agencia = _context.Agencia
+                .FirstOrDefault(a => a.Codigo == id);
 
             if (agencia == null)
             {
                 return NotFound();
             }
-            
+
             return View(agencia);
         }
 
         // POST: Agencia/Edit/x
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Agencia agencia)
+        public IActionResult Edit(int id, Agencia agenciaForm)
         {
-            if (!ModelState.IsValid)
+            if (id != agenciaForm.Codigo)
             {
-                return View(agencia);
+                return NotFound();
             }
 
-            _context.Agencia.Update(agencia);
+            if (!ModelState.IsValid)
+            {
+                return View(agenciaForm);
+            }
+
+            var agenciaEntity = _context.Agencia
+                .FirstOrDefault(a => a.Codigo == id);
+
+            if (agenciaEntity == null)
+            {
+                return NotFound();
+            }
+
+            agenciaEntity.Nome = agenciaForm.Nome;
+            agenciaEntity.Cidade = agenciaForm.Cidade;
+            agenciaEntity.EstadoUF = agenciaForm.EstadoUF;
+
             _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
