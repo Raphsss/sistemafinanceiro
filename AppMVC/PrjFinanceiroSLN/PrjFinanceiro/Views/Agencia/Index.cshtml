@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PrjFinanceiro.Models.Agencia>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Lista de Agências Bancárias -  @ViewBag.nomesenaii</h2>
+    <h2 class="mb-4">Lista de Agências Bancárias - @ViewBag.nomesenaii</h2>
 
     <p>
         <a href="/Agencia/Create" class="btn btn-success">Cadastrar Nova Agência</a>
@@ -20,13 +20,13 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>                    
+                <tr>
                     <td>@item.Codigo</td>
-                    <td><a href="/Agencia/Details/@item.Codigo">@item.Nome</a></td>
+                    <td>
+                        <a href="/Agencia/Details/@item.Codigo">@item.Nome</a>
+                    </td>
                     <td>@item.Cidade</td>
                     <td>@item.EstadoUF</td>
-                    <td>
-                        <a href="/Agencia/Edit/@item.Codigo" class="btn btn-sm btn-primary">Editar</a>
                     <td>
                         <a href="/Agencia/Edit/@item.Codigo" class="btn btn-sm btn-primary">Editar</a>
                         <button type="button"
@@ -37,7 +37,6 @@
                                 data-nome="@item.Nome">
                             Excluir
                         </button>
-                    </td>
                     </td>
                 </tr>
             }
@@ -74,6 +73,7 @@
             var button = event.relatedTarget;
             var codigo = button.getAttribute('data-codigo');
             var nome = button.getAttribute('data-nome');
+
             document.getElementById('agenciaCodigo').value = codigo;
             document.getElementById('agenciaNome').textContent = nome;
             document.getElementById('deleteForm').action = '/Agencia/Delete/' + codigo;

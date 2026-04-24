@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PrjFinanceiro.Data;
 using PrjFinanceiro.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PrjFinanceiro.Controllers
 {
@@ -14,9 +16,9 @@ namespace PrjFinanceiro.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var agencias = _context.Agencia.ToList();
+            var agencias = await _context.Agencia.ToListAsync();
             ViewBag.nomesenai = "SENAI";
 
 
@@ -24,14 +26,14 @@ namespace PrjFinanceiro.Controllers
         }
 
         // GET: Agencia/Details/x
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+            var agencia = await _context.Agencia.FirstOrDefaultAsync(agencia => agencia.Codigo == id);
 
             if (agencia == null)
             {
@@ -50,28 +52,28 @@ namespace PrjFinanceiro.Controllers
         // POST: Agencia/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Agencia agencia)
+        public async Task<IActionResult> Create(Agencia agencia)
         {
             if (!ModelState.IsValid)
             {
                 return View(agencia);
             }
 
-            _context.Agencia.Add(agencia);
-            _context.SaveChanges();
+            await _context.Agencia.AddAsync(agencia);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         // GET: Agencia/Edit/x
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var agencia = _context.Agencia
-                .FirstOrDefault(a => a.Codigo == id);
+            var agencia = await _context.Agencia
+                .FirstOrDefaultAsync(a => a.Codigo == id);
 
             if (agencia == null)
             {
@@ -84,7 +86,7 @@ namespace PrjFinanceiro.Controllers
         // POST: Agencia/Edit/x
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Agencia agenciaForm)
+        public async Task<IActionResult> Edit(int id, Agencia agenciaForm)
         {
             if (id != agenciaForm.Codigo)
             {
@@ -96,8 +98,8 @@ namespace PrjFinanceiro.Controllers
                 return View(agenciaForm);
             }
 
-            var agenciaEntity = _context.Agencia
-                .FirstOrDefault(a => a.Codigo == id);
+            var agenciaEntity = await _context.Agencia
+                .FirstOrDefaultAsync(a => a.Codigo == id);
 
             if (agenciaEntity == null)
             {
@@ -108,19 +110,20 @@ namespace PrjFinanceiro.Controllers
             agenciaEntity.Cidade = agenciaForm.Cidade;
             agenciaEntity.EstadoUF = agenciaForm.EstadoUF;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
         // GET: Agencia/Delete/x
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+            var agencia = await _context.Agencia
+                .FirstOrDefaultAsync(agencia => agencia.Codigo == id);
             if (agencia == null)
             {
                 return NotFound();
@@ -131,16 +134,18 @@ namespace PrjFinanceiro.Controllers
         // POST: Agencia/Delete/x
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var agencia = _context.Agencia.FirstOrDefault(agencia => agencia.Codigo == id);
+            var agencia = await _context.Agencia
+                .FirstOrDefaultAsync(agencia => agencia.Codigo == id);
             if (agencia == null)
             {
                 return NotFound();
             }
 
             _context.Agencia.Remove(agencia);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
     }

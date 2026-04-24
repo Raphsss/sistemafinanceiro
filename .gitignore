@@ -34,3 +34,4 @@ obj/
 *.user
 *.suo
 *.sln.docstates
+/AppMVC/PrjFinanceiroSLN/.vs
